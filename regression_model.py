@@ -3,6 +3,7 @@ from sklearn import linear_model
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_absolute_error, r2_score
 from sklearn.ensemble import RandomForestRegressor
+from xgboost import XGBRegressor
 
 df = pd.read_csv("imdb_top_1000.csv")
 
@@ -34,5 +35,18 @@ rf_predictions = rf_model.predict(X_test)
 rf_mae = mean_absolute_error(y_test, rf_predictions)
 rf_r2 = r2_score(y_test, rf_predictions)
 
+xgb_model = XGBRegressor(random_state=42)
+xgb_model.fit(X_train, y_train)
+xgb_predictions = xgb_model.predict(X_test)
+
+xgb_mae = mean_absolute_error(y_test, xgb_predictions)
+xgb_r2 = r2_score(y_test, xgb_predictions)
+
+print(mae)
+print(r2)
+
 print(rf_mae)
 print(rf_r2)
+
+print(xgb_mae)
+print(xgb_r2)
